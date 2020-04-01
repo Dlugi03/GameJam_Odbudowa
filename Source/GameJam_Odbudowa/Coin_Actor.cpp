@@ -11,12 +11,12 @@ ACoin_Actor::ACoin_Actor()
 
 	//Coin_Mesh
 	Coin_Mesh = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("Coin Mesh"));
-	RootComponent = Coin_Mesh;
+	Coin_Mesh->SetupAttachment(RootComponent);
 	
 	//Coin_Trigger
 	Coin_Trigger = CreateDefaultSubobject<UBoxComponent>(TEXT("Coin Trigger"));
 	Coin_Trigger->AttachToComponent(RootComponent, FAttachmentTransformRules::SnapToTargetNotIncludingScale);
-	Coin_Trigger->OnComponentBeginOverlap.AddDynamic(this, &ACoin_Actor::OnBeginOverlap)
+	Coin_Trigger->OnComponentBeginOverlap.AddDynamic(this, &ACoin_Actor::OnOverlapBegin);
 
 }
 
@@ -32,9 +32,15 @@ void ACoin_Actor::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
 
+	AddActorLocalRotation(FRotator(0.0f, 0.0f, 5.0f * DeltaTime).Quaternion());
 }
 
-void ACoin_Actor::OnBeginOverlap(AActor * OtherActor, UPrimitiveComponent * OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult & SweepResult)
+void ACoin_Actor::OnOverlapBegin(UPrimitiveComponent* OverlappedComp, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult)
 {
+	// Other Actor is the actor that triggered the event. Check that is not ourself.  
+	if ((OtherActor != nullptr))
+	{
+		//TODO: if OtherActor == PlayerActor Class
+		this->Destroy();
+	}
 }
-
