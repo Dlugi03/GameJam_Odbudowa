@@ -18,14 +18,16 @@ public:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 		UStaticMeshComponent* Tower_Mesh;
 	//Variables
-	UPROPERTY(EditAnywhere, BlueprintReadOnly)
-		TArray<UStaticMesh*> TowerStages;
 	UPROPERTY(VisibleAnywhere, BlueprintReadWrite)
-		int StagesLeft; //TowerStages count, -- for next unlocked server
+		int CurrentStage = 0;
 	UPROPERTY(EditAnywhere, BlueprintReadOnly)
-		int CoinsForOneStage = 2;
+		UStaticMesh* TowerBase; //Tower Mesh at game start
+	UPROPERTY(EditAnywhere, BlueprintReadOnly)
+		TArray<UStaticMesh*> StagesMeshes;
+	UPROPERTY(EditAnywhere, BlueprintReadOnly)
+		TArray<int32> StagesCoins;
 	UPROPERTY(VisibleAnywhere, BlueprintReadWrite)
-		int CointsForNextStage; //Coints left for next tower stage
+		int CoinsAtStage = 0; //Current Coins for Current Stage
 
 protected:
 	// Called when the game starts or when spawned

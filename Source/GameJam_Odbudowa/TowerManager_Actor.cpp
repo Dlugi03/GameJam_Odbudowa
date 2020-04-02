@@ -11,18 +11,18 @@ ATowerManager_Actor::ATowerManager_Actor()
 
 	//Tower_Mesh
 	Tower_Mesh = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("Tower Mesh"));
-	Tower_Mesh->AttachToComponent(RootComponent, FAttachmentTransformRules::SnapToTargetNotIncludingScale);
+	RootComponent = Tower_Mesh; //->AttachToComponent(RootComponent, FAttachmentTransformRules::SnapToTargetNotIncludingScale);
 }
 
 // Called when the game starts or when spawned
 void ATowerManager_Actor::BeginPlay()
 {
 	Super::BeginPlay();
-	
-	StagesLeft = TowerStages.Num();
-	CointsForNextStage = CoinsForOneStage;
 
-	Tower_Mesh->SetStaticMesh(TowerStages[TowerStages.Num() - StagesLeft]);
+	if(TowerBase != nullptr)
+		Tower_Mesh->SetStaticMesh(TowerBase);
+
+	CoinsAtStage = 0;
 }
 
 // Called every frame
@@ -34,17 +34,23 @@ void ATowerManager_Actor::Tick(float DeltaTime)
 
 void ATowerManager_Actor::CoinCollected()
 {
-	CointsForNextStage--;
-	if (CointsForNextStage <= 0)
-	{
-		StagesLeft--;
-		if (StagesLeft <= 0)
-		{
-			//TODO: Call Game Manager Win Game
-		}
-		CointsForNextStage = CoinsForOneStage;
+	//If Win Game, ignore this function
+	if (StagesCoins.Num() <= CurrentStage)
+		return;
 
-		Tower_Mesh->SetStaticMesh(TowerStages[TowerStages.Num() - StagesLeft]);
+	CoinsAtStage++;
+
+	if (StagesCoins[CurrentStage] <= CoinsAtStage)
+	{
+		CoinsAtStage = 0;
+		Tower_Mesh->SetStaticMesh(StagesMeshes[CurrentStage]);
+
+		CurrentStage++;
+
+		if (StagesCoins.Num() <= CurrentStage)
+		{
+			//TODO: WinGame
+		}
 	}
 }
 

@@ -7,6 +7,9 @@
 #include "Components/BoxComponent.h"
 #include "Coin_Actor.generated.h"
 
+//Forward Declarations
+class ATowerManager_Actor;
+
 UCLASS()
 class GAMEJAM_ODBUDOWA_API ACoin_Actor : public AActor
 {
@@ -20,6 +23,14 @@ public:
 		UStaticMeshComponent* Coin_Mesh;
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly)
 		UBoxComponent* Coin_Trigger;
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly)
+		ATowerManager_Actor* TowerManager;
+	//Variables
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly)
+		UStaticMesh* Coin_MeshRef;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+		float RotationSpeed = 5.0f;
 
 protected:
 	// Called when the game starts or when spawned
