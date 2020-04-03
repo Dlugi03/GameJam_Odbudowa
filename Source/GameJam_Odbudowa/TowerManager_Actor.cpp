@@ -45,7 +45,7 @@ void ATowerManager_Actor::CoinCollected()
 
 		if (CoinsForNextStage.Num() <= CurrentStage)
 		{
-			//TODO: WinGame
+			bWinGame = true;
 		}
 	}
 }

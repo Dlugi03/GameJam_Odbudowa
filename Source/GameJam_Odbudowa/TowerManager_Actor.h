@@ -28,6 +28,8 @@ public:
 		TArray<int32> CoinsForNextStage;
 	UPROPERTY(VisibleAnywhere, BlueprintReadWrite)
 		int CoinsAtStage = 0; //Current Coins for Current Stage
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly)
+		bool bWinGame = false;
 
 protected:
 	// Called when the game starts or when spawned
