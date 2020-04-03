@@ -26,7 +26,7 @@ public:
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly)
 		ATowerManager_Actor* TowerManager;
 	//Variables
-	UPROPERTY(VisibleAnywhere, BlueprintReadOnly)
+	UPROPERTY(EditAnywhere, BlueprintReadOnly)
 		UStaticMesh* Coin_MeshRef;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)

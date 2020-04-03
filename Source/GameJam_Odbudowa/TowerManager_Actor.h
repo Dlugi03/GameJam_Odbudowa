@@ -23,9 +23,9 @@ public:
 	UPROPERTY(EditAnywhere, BlueprintReadOnly)
 		UStaticMesh* TowerBase; //Tower Mesh at game start
 	UPROPERTY(EditAnywhere, BlueprintReadOnly)
-		TArray<UStaticMesh*> StagesMeshes;
+		TArray<UStaticMesh*> MeshesAtStage;
 	UPROPERTY(EditAnywhere, BlueprintReadOnly)
-		TArray<int32> StagesCoins;
+		TArray<int32> CoinsForNextStage;
 	UPROPERTY(VisibleAnywhere, BlueprintReadWrite)
 		int CoinsAtStage = 0; //Current Coins for Current Stage
 
@@ -34,9 +34,6 @@ protected:
 	virtual void BeginPlay() override;
 
 public:	
-	// Called every frame
-	virtual void Tick(float DeltaTime) override;
-
 	UFUNCTION(BlueprintCallable)
 		void CoinCollected();
 };

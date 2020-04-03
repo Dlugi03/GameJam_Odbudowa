@@ -25,29 +25,25 @@ void ATowerManager_Actor::BeginPlay()
 	CoinsAtStage = 0;
 }
 
-// Called every frame
-void ATowerManager_Actor::Tick(float DeltaTime)
-{
-	Super::Tick(DeltaTime);
-
-}
-
 void ATowerManager_Actor::CoinCollected()
 {
 	//If Win Game, ignore this function
-	if (StagesCoins.Num() <= CurrentStage)
+	if (CoinsForNextStage.Num() <= CurrentStage)
 		return;
 
-	CoinsAtStage++;
+	++CoinsAtStage;
 
-	if (StagesCoins[CurrentStage] <= CoinsAtStage)
+	if (CoinsForNextStage[CurrentStage] <= CoinsAtStage)
 	{
 		CoinsAtStage = 0;
-		Tower_Mesh->SetStaticMesh(StagesMeshes[CurrentStage]);
+
+		if (MeshesAtStage.Num() <= CurrentStage)
+			return;
+		Tower_Mesh->SetStaticMesh(MeshesAtStage[CurrentStage]);
 
 		CurrentStage++;
 
-		if (StagesCoins.Num() <= CurrentStage)
+		if (CoinsForNextStage.Num() <= CurrentStage)
 		{
 			//TODO: WinGame
 		}

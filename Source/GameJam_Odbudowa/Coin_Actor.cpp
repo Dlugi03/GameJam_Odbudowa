@@ -27,9 +27,9 @@ void ACoin_Actor::BeginPlay()
 {
 	Super::BeginPlay();
 	
-	TArray<AActor*> foundedActors;
-	UGameplayStatics::GetAllActorsOfClass(GetWorld(), ATowerManager_Actor::StaticClass(), foundedActors);
-	TowerManager = Cast<ATowerManager_Actor>(foundedActors[0]);
+	TArray<AActor*> FoundActors;
+	UGameplayStatics::GetAllActorsOfClass(GetWorld(), ATowerManager_Actor::StaticClass(), FoundActors);
+	TowerManager = Cast<ATowerManager_Actor>(FoundActors[0]);
 
 	if (Coin_MeshRef != nullptr)
 		Coin_Mesh->SetStaticMesh(Coin_MeshRef);
