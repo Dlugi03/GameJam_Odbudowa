@@ -30,7 +30,7 @@ public:
 		UStaticMesh* Coin_MeshRef;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
-		float RotationSpeed = 5.0f;
+		float RotationSpeed = 15.0f;
 
 protected:
 	// Called when the game starts or when spawned

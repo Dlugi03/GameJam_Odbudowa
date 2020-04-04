@@ -9,21 +9,12 @@ APlayer_Char::APlayer_Char()
  	// Set this character to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
 	PrimaryActorTick.bCanEverTick = true;
 
+	//FP_Cam
+	FP_Cam = CreateDefaultSubobject<UCameraComponent>(TEXT("FP Cam"));
+	FP_Cam->AttachToComponent(RootComponent, FAttachmentTransformRules::SnapToTargetNotIncludingScale);
+	FP_Cam->SetRelativeLocation(FVector(0.0f, 0.0f, 60.0f));
+
 	bUseControllerRotationPitch = true;
-}
-
-// Called when the game starts or when spawned
-void APlayer_Char::BeginPlay()
-{
-	Super::BeginPlay();
-	
-}
-
-// Called every frame
-void APlayer_Char::Tick(float DeltaTime)
-{
-	Super::Tick(DeltaTime);
-
 }
 
 // Called to bind functionality to input

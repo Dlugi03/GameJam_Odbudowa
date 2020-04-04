@@ -4,6 +4,7 @@
 
 #include "CoreMinimal.h"
 #include "GameFramework/Character.h"
+#include "Camera/CameraComponent.h"
 #include "Player_Char.generated.h"
 
 UCLASS()
@@ -14,18 +15,11 @@ class GAMEJAM_ODBUDOWA_API APlayer_Char : public ACharacter
 public:
 	// Sets default values for this character's properties
 	APlayer_Char();
-
-protected:
-	// Called when the game starts or when spawned
-	virtual void BeginPlay() override;
-
-public:	
-	// Called every frame
-	virtual void Tick(float DeltaTime) override;
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly)
+		UCameraComponent* FP_Cam;
 
 	// Called to bind functionality to input
 	virtual void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;
-
 
 	UFUNCTION()
 		void MoveForward(float Value);

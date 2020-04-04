@@ -20,6 +20,8 @@ public:
 	//Variables
 	UPROPERTY(VisibleAnywhere, BlueprintReadWrite)
 		int CurrentStage = 0;
+	UPROPERTY(VisibleAnywhere, BlueprintReadWrite)
+		int StagesCount = 0;
 	UPROPERTY(EditAnywhere, BlueprintReadOnly)
 		UStaticMesh* TowerBase; //Tower Mesh at game start
 	UPROPERTY(EditAnywhere, BlueprintReadOnly)

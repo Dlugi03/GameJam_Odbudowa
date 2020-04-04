@@ -23,6 +23,8 @@ void ATowerManager_Actor::BeginPlay()
 		Tower_Mesh->SetStaticMesh(TowerBase);
 
 	CoinsAtStage = 0;
+
+	StagesCount = CoinsForNextStage.Num();
 }
 
 void ATowerManager_Actor::CoinCollected()
