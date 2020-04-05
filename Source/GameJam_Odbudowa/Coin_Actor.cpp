@@ -33,6 +33,8 @@ void ACoin_Actor::BeginPlay()
 
 	if (Coin_MeshRef != nullptr)
 		Coin_Mesh->SetStaticMesh(Coin_MeshRef);
+
+	BaseHeight = GetActorLocation().Z;
 }
 
 // Called every frame
@@ -41,6 +43,12 @@ void ACoin_Actor::Tick(float DeltaTime)
 	Super::Tick(DeltaTime);
 
 	AddActorLocalRotation(FRotator(0.0f, RotationSpeed * DeltaTime, 0.0f));
+
+	AddActorLocalOffset(FVector(0.0f, 0.0f, FloatingSpeed * DeltaTime * (bFloatingUp ? 1.0f : -1.0f)));
+	if (GetActorLocation().Z >= BaseHeight + FloatingHeight)
+		bFloatingUp = false;
+	else if (GetActorLocation().Z <= BaseHeight)
+		bFloatingUp = true;
 }
 
 void ACoin_Actor::OnOverlapBegin(UPrimitiveComponent* OverlappedComp, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult)

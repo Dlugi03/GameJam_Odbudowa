@@ -29,8 +29,16 @@ public:
 	UPROPERTY(EditAnywhere, BlueprintReadOnly)
 		UStaticMesh* Coin_MeshRef;
 
-	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+	UPROPERTY(EditAnywhere, BlueprintReadOnly)
 		float RotationSpeed = 15.0f;
+	UPROPERTY(EditAnywhere, BlueprintReadOnly)
+		float FloatingSpeed = 10.0f;
+	UPROPERTY(EditAnywhere, BlueprintReadOnly)
+		float FloatingHeight = 50.0f;
+	UPROPERTY(VisibleDefaultsOnly)
+		float BaseHeight;
+	UPROPERTY(VisibleDefaultsOnly)
+		bool bFloatingUp = true;
 
 protected:
 	// Called when the game starts or when spawned
