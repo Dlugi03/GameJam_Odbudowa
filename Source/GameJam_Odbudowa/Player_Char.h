@@ -17,10 +17,17 @@ public:
 	APlayer_Char();
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly)
 		UCameraComponent* FP_Cam;
+	//Variables
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly)
+		bool bGameOver = false;
 
 	// Called to bind functionality to input
 	virtual void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;
 
+	UFUNCTION()
+		void OnOverlapBegin(UPrimitiveComponent* OverlappedComp, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult);
+
+	//Movement Inputs
 	UFUNCTION()
 		void MoveForward(float Value);
 	UFUNCTION()
