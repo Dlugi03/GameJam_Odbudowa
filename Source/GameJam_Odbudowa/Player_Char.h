@@ -23,6 +23,9 @@ public:
 	bool bGameOver = false;
 
 	UPROPERTY(BlueprintReadWrite)
+	bool IsPickingUpContract;
+
+	UPROPERTY(BlueprintReadWrite)
 	bool IsCarryingContract;
 
 	virtual void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;
