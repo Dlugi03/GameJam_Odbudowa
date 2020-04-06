@@ -5,31 +5,26 @@
 #include "CoreMinimal.h"
 #include "Collectable.h"
 #include "GameFramework/Actor.h"
-#include "Coin_Actor.generated.h"
+#include "Contract.generated.h"
 
 class UBoxComponent;
-class ATowerManager_Actor;
 
 UCLASS()
-class GAMEJAM_ODBUDOWA_API ACoin_Actor : public ACollectable
+class GAMEJAM_ODBUDOWA_API AContract : public ACollectable
 {
 	GENERATED_BODY()
 	
 public:	
-
-	ACoin_Actor();
-
-	UPROPERTY(VisibleAnywhere, BlueprintReadOnly)
-	UBoxComponent* Coin_Trigger;
+	// Sets default values for this actor's properties
+	AContract();
 
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly)
-	ATowerManager_Actor* TowerManager;
+	UBoxComponent* CollectableTrigger;
 
 protected:
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
 
-public:	
 
 	UFUNCTION()
 	void OnOverlapBegin(UPrimitiveComponent* OverlappedComp, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult);
