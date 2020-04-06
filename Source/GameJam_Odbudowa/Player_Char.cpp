@@ -11,7 +11,7 @@ APlayer_Char::APlayer_Char()
 
 	//FP_Cam
 	FP_Cam = CreateDefaultSubobject<UCameraComponent>(TEXT("FP Cam"));
-	FP_Cam->AttachToComponent(RootComponent, FAttachmentTransformRules::SnapToTargetNotIncludingScale);
+	FP_Cam->AttachToComponent(RootComponent, FAttachmentTransformRules::KeepRelativeTransform);
 	FP_Cam->SetRelativeLocation(FVector(0.0f, 0.0f, 60.0f));
 
 	bUseControllerRotationPitch = true;
