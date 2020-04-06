@@ -31,7 +31,7 @@ void AContract::OnOverlapBegin(UPrimitiveComponent* OverlappedComp, AActor* Othe
 
 	if (Player)
 	{
-		Player->IsPickingUpContract = true;
+		Player->OnContractPicked();
 		this->Destroy();
 	}
 }

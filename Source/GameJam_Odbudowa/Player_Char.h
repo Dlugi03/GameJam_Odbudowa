@@ -7,6 +7,8 @@
 #include "Camera/CameraComponent.h"
 #include "Player_Char.generated.h"
 
+DECLARE_DYNAMIC_MULTICAST_DELEGATE(FDynamicMulticastDelegateCH);
+
 UCLASS()
 class GAMEJAM_ODBUDOWA_API APlayer_Char : public ACharacter
 {
@@ -18,6 +20,9 @@ public:
 
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly)
 	UCameraComponent* FP_Cam;
+
+	UPROPERTY(BlueprintAssignable)
+	FDynamicMulticastDelegateCH Delegate;
 
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly)
 	bool bGameOver = false;
@@ -44,4 +49,8 @@ public:
 
 	UFUNCTION()
 	void LookUp(float Value);
+
+	void OnContractPicked();
+
+	void DropContract();
 };

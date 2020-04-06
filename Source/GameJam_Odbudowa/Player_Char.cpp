@@ -39,6 +39,24 @@ void APlayer_Char::OnOverlapBegin(UPrimitiveComponent * OverlappedComp, AActor *
 	}
 }
 
+void APlayer_Char::OnContractPicked()
+{
+	IsPickingUpContract = true;
+	FTimerHandle MemberTimerHandle;
+
+	GetWorldTimerManager().SetTimer(MemberTimerHandle, this, &APlayer_Char::DropContract, 8.0f, true);
+}
+
+void APlayer_Char::DropContract()
+{
+	IsCarryingContract = false;
+
+	if (Delegate.IsBound())
+	{
+		Delegate.Broadcast();
+	}
+}
+
 void APlayer_Char::MoveForward(float Value)
 {
 	FVector forward = FRotationMatrix(GetControlRotation()).GetScaledAxis(EAxis::X);
