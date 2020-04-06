@@ -1,8 +1,7 @@
 // Fill out your copyright notice in the Description page of Project Settings.
 
-#include "TowerManager_Actor.h"
-
 #include "Coin_Actor.h"
+#include "TowerManager_Actor.h"
 #include "Kismet/GameplayStatics.h"
 
 // Sets default values
@@ -19,12 +18,13 @@ ACoin_Actor::ACoin_Actor()
 	//Coin_Trigger
 	Coin_Trigger = CreateDefaultSubobject<UBoxComponent>(TEXT("Coin Trigger"));
 	Coin_Trigger->AttachToComponent(RootComponent, FAttachmentTransformRules::SnapToTargetNotIncludingScale);
-	Coin_Trigger->OnComponentBeginOverlap.AddDynamic(this, &ACoin_Actor::OnOverlapBegin);
 }
 
 // Called when the game starts or when spawned
 void ACoin_Actor::BeginPlay()
 {
+	Coin_Trigger->OnComponentBeginOverlap.AddDynamic(this, &ACoin_Actor::OnOverlapBegin);
+
 	Super::BeginPlay();
 	
 	TArray<AActor*> FoundActors;
