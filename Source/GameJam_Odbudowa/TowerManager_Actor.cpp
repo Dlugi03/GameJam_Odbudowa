@@ -29,9 +29,15 @@ void ATowerManager_Actor::BeginPlay()
 
 void ATowerManager_Actor::CoinCollected()
 {
-	//If Win Game, ignore this function
 	if (CoinsForNextStage.Num() <= CurrentStage)
+	{
 		return;
+	}
+
+	if (OnCoinCollected.IsBound())
+	{
+		OnCoinCollected.Broadcast();
+	}
 
 	++CoinsAtStage;
 
@@ -40,14 +46,27 @@ void ATowerManager_Actor::CoinCollected()
 		CoinsAtStage = 0;
 
 		if (MeshesAtStage.Num() <= CurrentStage)
+		{
 			return;
+		}
+			
 		Tower_Mesh->SetStaticMesh(MeshesAtStage[CurrentStage]);
 
-		CurrentStage++;
+		++CurrentStage;
+
+		if (OnStageChanged.IsBound())
+		{
+			OnStageChanged.Broadcast();
+		}
 
 		if (CoinsForNextStage.Num() <= CurrentStage)
 		{
 			bWinGame = true;
+
+			if (OnGameFinished.IsBound())
+			{
+				OnGameFinished.Broadcast();
+			}
 		}
 	}
 }

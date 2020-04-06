@@ -6,32 +6,51 @@
 #include "GameFramework/Actor.h"
 #include "TowerManager_Actor.generated.h"
 
+DECLARE_DYNAMIC_MULTICAST_DELEGATE(FDynamicMulticastDelegate);
+
 UCLASS()
 class GAMEJAM_ODBUDOWA_API ATowerManager_Actor : public AActor
 {
 	GENERATED_BODY()
 	
 public:	
-	// Sets default values for this actor's properties
+
 	ATowerManager_Actor();
-	//Components
+	
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
-		UStaticMeshComponent* Tower_Mesh;
-	//Variables
-	UPROPERTY(VisibleAnywhere, BlueprintReadWrite)
-		int CurrentStage = 0;
-	UPROPERTY(VisibleAnywhere, BlueprintReadWrite)
-		int StagesCount = 0;
+	UStaticMeshComponent* Tower_Mesh;
+	
 	UPROPERTY(EditAnywhere, BlueprintReadOnly)
-		UStaticMesh* TowerBase; //Tower Mesh at game start
+	UStaticMesh* TowerBase;
+
 	UPROPERTY(EditAnywhere, BlueprintReadOnly)
-		TArray<UStaticMesh*> MeshesAtStage;
+	TArray<UStaticMesh*> MeshesAtStage;
+
 	UPROPERTY(EditAnywhere, BlueprintReadOnly)
-		TArray<int32> CoinsForNextStage;
+	TArray<int32> CoinsForNextStage;
+
 	UPROPERTY(VisibleAnywhere, BlueprintReadWrite)
-		int CoinsAtStage = 0; //Current Coins for Current Stage
+	int CoinsAtStage = 0;
+
+	UPROPERTY(VisibleAnywhere, BlueprintReadWrite)
+	int CurrentStage = 0;
+
+	UPROPERTY(VisibleAnywhere, BlueprintReadWrite)
+	int StagesCount = 0;
+
+	UPROPERTY(BlueprintAssignable)
+	FDynamicMulticastDelegate OnCoinCollected;
+
+	UPROPERTY(BlueprintAssignable)
+	FDynamicMulticastDelegate OnStageChanged;
+
+	UPROPERTY(BlueprintAssignable)
+	FDynamicMulticastDelegate OnGameFinished;
+
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly)
-		bool bWinGame = false;
+	bool bWinGame = false;
+
+
 
 protected:
 	// Called when the game starts or when spawned
